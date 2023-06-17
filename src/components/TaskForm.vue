@@ -82,7 +82,7 @@ export default {
 
     color: var(--primary-text-color);
     text-align: center;
-    margin: 0 0 15px;
+    margin: 0 0 20px;
   }
 
   .name-input,
@@ -93,6 +93,7 @@ export default {
     color: var(--primary-text-color);
     padding: 10px;
     border: 1px solid var(--primary-text-color);
+    border-radius: var(--default-border-radius);
 
     ::placeholder {
       @include txt18;
@@ -116,6 +117,7 @@ export default {
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     margin: 10px 0 0;
+    border-radius: var(--default-border-radius);
 
     &:hover {
       background-color: transparent;

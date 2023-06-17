@@ -4,7 +4,7 @@
       This is a simple task manager that will help you not forget anything important
     </h1>
     <p class="subtitle">Click the button below to start using the application</p>
-    <router-link class="nav-link" to="/tasks">Start here</router-link>
+    <router-link class="nav-link" :to="{ name: 'tasks' }">Start here</router-link>
   </div>
 </template>
 
@@ -47,7 +47,8 @@ export default {
     background-color: var(--contrast-bg-color);
     padding: 15px 20px;
     border: 2px solid transparent;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    border-radius: var(--default-border-radius);
 
     &:hover {
       background-color: transparent;

@@ -1,6 +1,6 @@
 <template>
   <div class="task-view">
-    <router-link class="nav-link" to="/">
+    <router-link class="nav-link" :to="{ name: 'home' }">
       <img src="/img/arrow-icon.svg" alt="Go back" />
       back to main page
     </router-link>
