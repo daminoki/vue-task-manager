@@ -1,21 +1,26 @@
-<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
   <div class="task-form">
-    <form class="form">
-      <p>Add new task</p>
-
+    <form class="form" autocomplete="off">
+      <p class="title">Add new task</p>
       <label for="name">
-        <input v-model="task.name" id="name" type="text" placeholder="Write task's name..." />
+        <input
+          class="name-input"
+          v-model="task.name"
+          id="name"
+          type="text"
+          placeholder="Write task's name..."
+        />
       </label>
       <label for="desctiption">
         <textarea
+          class="description-input"
           v-model="task.description"
           id="desctiption"
           placeholder="Write task's description..."
         ></textarea>
       </label>
-      <span>{{ error }}</span>
-      <button @click="handleTaskSubmit">Add task</button>
+      <span v-if="error" class="error">{{ error }}</span>
+      <button class="submit-button" @click="handleTaskSubmit">Add task</button>
     </form>
   </div>
 </template>
@@ -61,13 +66,68 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/mixins';
+
 .task-form {
   padding-top: 40px;
 
   .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    width: 100%;
+  }
+
+  .title {
+    @include h3;
+
+    color: var(--primary-text-color);
+    text-align: center;
+    margin: 0 0 15px;
+  }
+
+  .name-input,
+  .description-input {
+    @include txt18;
+
+    width: 100%;
+    color: var(--primary-text-color);
+    padding: 10px;
+    border: 1px solid var(--primary-text-color);
+
+    ::placeholder {
+      @include txt18;
+
+      color: var(--primary-text-color);
+    }
+  }
+
+  .name-input {
+    margin: 0 0 10px;
+  }
+
+  .submit-button {
+    @include txt18;
+
+    padding: 15px;
+    text-align: center;
+    color: var(--contrast-text-color);
+    background-color: var(--contrast-bg-color);
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    margin: 10px 0 0;
+
+    &:hover {
+      background-color: transparent;
+      border-color: var(--contrast-bg-color);
+      color: var(--contrast-bg-color);
+    }
+  }
+
+  .error {
+    @include txt14;
+
+    color: var(--error-text-color);
   }
 }
 </style>
