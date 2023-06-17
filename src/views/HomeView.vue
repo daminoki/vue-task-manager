@@ -1,39 +1,59 @@
 <template>
   <div class="home-view">
-    <p>{{ getFirstItem }}</p>
-    <button type="button" class="button" @click="handleButtonClick">click</button>
-    <ul>
-      <li v-for="(item, index) in array" :key="index">
-        {{ item }}
-      </li>
-    </ul>
+    <h1 class="title">
+      This is a simple task manager that will help you not forget anything important
+    </h1>
+    <p class="subtitle">Click the button below to start using the application</p>
+    <router-link class="button" to="/tasks">Start here</router-link>
   </div>
 </template>
 
 <script>
 export default {
   name: 'HomeView',
-  data() {
-    return {
-      message: 'Hello',
-      array: [1, 2, 3],
-    };
-  },
-  computed: {
-    getFirstItem() {
-      return this.array[0];
-    },
-  },
-  methods: {
-    handleButtonClick() {
-      this.message = 'new message';
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/mixins';
+
 .home-view {
-  background-color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .title {
+    @include h1;
+
+    color: var(--primary-text-color);
+    text-align: center;
+    padding: 60px 0 30px;
+  }
+
+  .subtitle {
+    @include h3;
+
+    color: var(--primary-text-color);
+    text-align: center;
+    padding: 0 0 30px;
+  }
+
+  .button {
+    @include h3;
+
+    color: var(--contrast-text-color);
+    background-color: var(--contrast-bg-color);
+    padding: 15px 20px;
+    border: 2px solid transparent;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      background-color: transparent;
+      border-color: var(--contrast-bg-color);
+      color: var(--contrast-bg-color);
+    }
+  }
 }
 </style>

@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/tasks">Tasks</router-link>
-    </nav>
-
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -19,6 +14,7 @@ export default {
 @import '@/assets/styles/reset';
 @import '@/assets/styles/global';
 @import '@/assets/styles/mixins';
+@import '@/assets/styles/variables';
 
 #app {
   @include container;
