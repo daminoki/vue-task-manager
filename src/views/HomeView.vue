@@ -1,18 +1,39 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home-view">
+    <p>{{ getFirstItem }}</p>
+    <button type="button" class="button" @click="handleButtonClick">click</button>
+    <ul>
+      <li v-for="(item, index) in array" :key="index">
+        {{ item }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      message: 'Hello',
+      array: [1, 2, 3],
+    };
+  },
+  computed: {
+    getFirstItem() {
+      return this.array[0];
+    },
+  },
+  methods: {
+    handleButtonClick() {
+      this.message = 'new message';
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.home-view {
+  background-color: #d9d9d9;
+}
+</style>
