@@ -5,13 +5,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    tasks: [],
   },
   getters: {
+    getTasks(state) {
+      return state.tasks;
+    },
   },
   mutations: {
+    addTask(state, task) {
+      state.tasks.push(task);
+    },
   },
   actions: {
-  },
-  modules: {
+    addTask({ commit }, task) {
+      commit('addTask', task);
+    },
   },
 });
