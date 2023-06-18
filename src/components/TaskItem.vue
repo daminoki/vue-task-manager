@@ -5,6 +5,7 @@
         type="checkbox"
         :id="`checkbox-${task.id}`"
         @click="handleFinishButtonClick"
+        :checked="this.done ? true : false"
       />
       <span class="custom-checkbox"></span>
     </label>
@@ -14,13 +15,16 @@
       <p class="description">{{ task.description }}</p>
     </div>
     <div class="edit" v-else>
+      <p class="input-title">New task name:</p>
       <input class="input-name" v-model="name" type="text" name="name" />
+      <p class="input-title">New task description:</p>
       <textarea
         class="input-description"
         v-model="description"
         name="description"
         id="description"
       ></textarea>
+      <p v-if="error" class="error">{{ this.error }}</p>
     </div>
 
     <div class="actions">
@@ -54,6 +58,7 @@ export default {
       description: this.task.description,
       done: this.task.done,
       canEdit: false,
+      error: '',
     };
   },
   methods: {
@@ -62,6 +67,11 @@ export default {
       this.deleteTask(this.task.id);
     },
     handleSaveButtonClick() {
+      if (!this.name) {
+        this.error = 'Name is required';
+        return;
+      }
+
       this.canEdit = false;
       this.editTask({ ...this.task, name: this.name, description: this.description });
     },
@@ -123,19 +133,21 @@ export default {
       display: none;
 
       &:checked + .custom-checkbox::before {
-        background-image: url('~@/assets/img/checked-icon.svg');
+        background-image: url('../../public/img/checked-icon.svg');
       }
     }
   }
 
-  .name, .input-name {
+  .name,
+  .input-name {
     @include txt18;
 
     color: var(--primary-text-color);
     margin: 0 0 5px;
   }
 
-  .description, .input-description {
+  .description,
+  .input-description {
     @include txt14;
 
     color: var(--primary-text-color);
@@ -148,8 +160,25 @@ export default {
   }
 
   .input-description {
-    height: fit-content;
     resize: none;
+  }
+
+  .input-name,
+  .input-description {
+    padding: 5px;
+  }
+
+  .input-title {
+    @include txt14;
+
+    color: var(--primary-text-color);
+    margin: 0 0 5px;
+  }
+
+  .error {
+    @include txt14;
+
+    color: var(--error-text-color);
   }
 
   &.done {

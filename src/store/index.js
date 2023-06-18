@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    tasks: [],
+    tasks: JSON.parse(localStorage.getItem('tasks')),
   },
   getters: {
     getTasks(state) {
@@ -15,9 +15,11 @@ export default new Vuex.Store({
   mutations: {
     addTask(state, task) {
       state.tasks.push(task);
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((task) => task.id !== id);
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
     editTask(state, editedTask) {
       state.tasks.splice(
@@ -25,6 +27,7 @@ export default new Vuex.Store({
         1,
         editedTask,
       );
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
     toggleFinishTask(state, task) {
       state.tasks.splice(
@@ -32,6 +35,7 @@ export default new Vuex.Store({
         1,
         task,
       );
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
   },
   actions: {

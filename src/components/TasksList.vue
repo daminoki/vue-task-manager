@@ -21,8 +21,7 @@ export default {
   computed: {
     ...mapGetters(['getTasks']),
     sortedTasks() {
-      const tasks = [...this.getTasks];
-      return tasks.sort((a, b) => a.done - b.done);
+      return [...this.getTasks].sort((a, b) => a.done - b.done);
     },
   },
 };
