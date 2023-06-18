@@ -15,9 +15,9 @@
       <p class="description">{{ task.description }}</p>
     </div>
     <div class="edit" v-else>
-      <p class="input-title">New task name:</p>
+      <p class="input-title">New task's name:</p>
       <input class="input-name" v-model="name" type="text" name="name" />
-      <p class="input-title">New task description:</p>
+      <p class="input-title">New task's description:</p>
       <textarea
         class="input-description"
         v-model="description"
@@ -98,6 +98,12 @@ export default {
 
   .info {
     width: 80%;
+    overflow: hidden;
+
+    @media screen and (1px <= width <= 767px) {
+      width: auto;
+      margin-right: auto;
+    }
   }
 
   .actions {
@@ -106,6 +112,14 @@ export default {
     gap: 10px;
     align-items: center;
     justify-content: flex-end;
+
+    @media screen and (1px <= width <= 767px) {
+      width: fit-content;
+    }
+
+    button {
+      min-width: 32px;
+    }
   }
 
   .custom-checkbox {
@@ -128,6 +142,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (1px <= width <= 767px) {
+      width: fit-content;
+    }
 
     input {
       display: none;
