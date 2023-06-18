@@ -1,23 +1,33 @@
 <template>
-  <div class="task-item">
-    <label class="checkbox" for="checkbox">
-      <input type="checkbox" id="checkbox" @click="handleFinishButtonClick" />
+  <div class="task-item" :class="this.done ? 'done' : 'undone'">
+    <label v-if="!canEdit" class="checkbox" :for="`checkbox-${task.id}`">
+      <input
+        type="checkbox"
+        :id="`checkbox-${task.id}`"
+        @click="handleFinishButtonClick"
+      />
+      <span class="custom-checkbox"></span>
     </label>
 
     <div class="info" v-if="!canEdit">
-      <p>{{ task.name }}</p>
-      <p>{{ task.description }}</p>
+      <p class="name">{{ task.name }}</p>
+      <p class="description">{{ task.description }}</p>
     </div>
-    <div v-else>
-      <input v-model="name" type="text" name="name" />
-      <textarea v-model="description" name="description" id="description"></textarea>
+    <div class="edit" v-else>
+      <input class="input-name" v-model="name" type="text" name="name" />
+      <textarea
+        class="input-description"
+        v-model="description"
+        name="description"
+        id="description"
+      ></textarea>
     </div>
 
     <div class="actions">
-      <button v-if="!canEdit" aria-label="edit" @click="canEdit = true">
+      <button v-if="!canEdit && !this.done" aria-label="edit" @click="canEdit = true">
         <img src="/img/edit-icon.svg" alt="Edit" />
       </button>
-      <button v-else aria-label="save" @click="handleSaveButtonClick">
+      <button v-if="canEdit && !this.done" aria-label="save" @click="handleSaveButtonClick">
         <img src="/img/save-icon.svg" alt="Save" />
       </button>
       <button aria-label="delete" @click="handleDeleteButtonClick">
@@ -76,10 +86,6 @@ export default {
   border: 1px solid var(--primary-text-color);
   border-radius: var(--default-border-radius);
 
-  .checkbox {
-    width: 5%;
-  }
-
   .info {
     width: 80%;
   }
@@ -90,6 +96,64 @@ export default {
     gap: 10px;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  .custom-checkbox {
+    display: flex;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      min-width: 24px;
+      height: 24px;
+      border: 1px solid var(--primary-text-color);
+      border-radius: var(--default-border-radius);
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .checkbox {
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      display: none;
+
+      &:checked + .custom-checkbox::before {
+        background-image: url('~@/assets/img/checked-icon.svg');
+      }
+    }
+  }
+
+  .name, .input-name {
+    @include txt18;
+
+    color: var(--primary-text-color);
+    margin: 0 0 5px;
+  }
+
+  .description, .input-description {
+    @include txt14;
+
+    color: var(--primary-text-color);
+  }
+
+  .edit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-description {
+    height: fit-content;
+    resize: none;
+  }
+
+  &.done {
+    background-color: #d9d9d9;
   }
 }
 </style>

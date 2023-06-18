@@ -30,6 +30,10 @@ export default {
     color: var(--primary-text-color);
     text-align: center;
     padding: 60px 0 30px;
+
+    @media screen and (1px <= width <= 1023px) {
+      @include h3;
+    }
   }
 
   .subtitle {
@@ -38,6 +42,10 @@ export default {
     color: var(--primary-text-color);
     text-align: center;
     padding: 0 0 30px;
+
+    @media screen and (1px <= width <= 1023px) {
+      @include txt18;
+    }
   }
 
   .nav-link {
@@ -54,6 +62,10 @@ export default {
       background-color: transparent;
       border-color: var(--contrast-bg-color);
       color: var(--contrast-bg-color);
+    }
+
+    @media screen and (1px <= width <= 1023px) {
+      @include txt18;
     }
   }
 }

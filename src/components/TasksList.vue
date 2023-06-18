@@ -5,7 +5,7 @@
       List is empty now. Add some task and you will see them!
     </p>
     <ul v-else class="list">
-      <li v-for="task in getTasks" :key="task.id">
+      <li v-for="task in sortedTasks" :key="task.id">
         <TaskItem :task="task" />
       </li>
     </ul>
@@ -20,6 +20,10 @@ export default {
   components: { TaskItem },
   computed: {
     ...mapGetters(['getTasks']),
+    sortedTasks() {
+      const tasks = [...this.getTasks];
+      return tasks.sort((a, b) => a.done - b.done);
+    },
   },
 };
 </script>

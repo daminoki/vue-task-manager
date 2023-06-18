@@ -2,7 +2,7 @@
   <div class="task-view">
     <router-link class="nav-link" :to="{ name: 'home' }">
       <img src="/img/arrow-icon.svg" alt="Go back" />
-      back to main page
+      back to the main page
     </router-link>
     <TaskForm />
     <TasksList />
