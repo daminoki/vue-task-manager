@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    tasks: JSON.parse(localStorage.getItem('tasks')),
+    tasks: localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [],
   },
   getters: {
     getTasks(state) {
